@@ -25,12 +25,24 @@ function App() {
     setNoteList(()=>{
       return noteList.filter((note)=>note.id !== id)
     })
+    
+
+  }
+  const filterHandler = (id)=>{
+    setNoteList(()=>{
+      return noteList.filter((note)=>note.id !== id)
+    })
+    setFilterList(()=>{
+      return filterList.filter((note)=>note.id !== id)
+    })
+
   }
 
   const filterFun = (keyValue)=>{
 
     if(keyValue === ''){
         setPrintFilter(false)
+        setFilterList('')
     }else{
       setFilterList(()=>{
         const demonodelist = noteList
@@ -52,7 +64,7 @@ function App() {
       <ul>
          {!printFilter && noteList.map((note)=><NoteItem deleteHandler={deleteHandler} key={note.id}  {...note}></NoteItem>)}
 
-         {printFilter && filterList.map((note)=><NoteItem deleteHandler={deleteHandler} key={note.id}  {...note}></NoteItem>)}
+         {printFilter && filterList.map((note)=><NoteItem deleteHandler={filterHandler} key={note.id}  {...note}></NoteItem>)}
        
       </ul>
       </div>
